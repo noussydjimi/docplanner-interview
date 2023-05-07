@@ -191,3 +191,123 @@ variable "karpenter-helmchart-version" {
   default     = "v0.16.3"
 }
 
+
+
+##########################
+## RDS MODULE VARIABLES ##
+##########################
+
+variable "rds_identifier" {
+  type        = string
+  description = "The rds instance identifier"
+  default     = "doc-planner"
+}
+
+variable "rds_engine" {
+  type        = string
+  description = "The rds database engine"
+  default     = "postgres"
+}
+
+variable "rds_engine_version" {
+  type        = string
+  description = "The rds database version"
+  default     = "14"
+}
+
+variable "rds_instance_class" {
+  type        = string
+  description = "The rds instance class"
+  default     = "db.t4g.micro"
+}
+
+variable "rds_instance_allocated_storage" {
+  type        = number
+  description = "The rds instance allocated storage"
+  default     = 5
+}
+
+variable "rds_db_name" {
+  type        = string
+  description = "The rds database name"
+  default     = "interview"
+}
+
+variable "rds_username" {
+  type        = string
+  description = "The rds database username"
+  default     = "testuser"
+}
+
+variable "rds_port" {
+  type        = string
+  description = "The rds database port"
+  default     = "5432"
+}
+
+variable "rds_parameter_group_family" {
+  type        = string
+  description = "The rds database parameter group family"
+  default     = "postgres14"
+}
+
+variable "rds_major_engine_version" {
+  type        = string
+  description = "The rds database major engine version"
+  default     = "14"
+}
+
+variable "rds_security_group_name" {
+  type        = string
+  description = "The rds security group name"
+  default     = "rds"
+}
+
+
+
+##################################
+## RDS BASTION MODULE VARIABLES ##
+##################################
+
+
+variable "rds_bastion_name" {
+  type        = string
+  description = "the rds bastion instance name"
+  default     = "rds-bastion"
+}
+
+variable "rds_bastion_instance_type" {
+  type        = string
+  description = "the rds bastion instance type"
+  default     = "t3.micro"
+}
+
+variable "rds_bastion_az" {
+  type        = string
+  description = "the rds bastion instance az"
+  default     = "eu-north-1a"
+}
+
+variable "rds_bastion_spot_instance" {
+  type        = bool
+  description = "activate the rds bastion as a spot instance"
+  default     = true
+}
+
+variable "rds_bastion_public_ip" {
+  type        = bool
+  description = "provide the rds bastion instancewith public ip"
+  default     = true
+}
+
+variable "rds_bastion_security_group_name" {
+  type        = string
+  description = "the rds bastion instance type"
+  default     = "rds-bastion"
+}
+
+variable "rds_bastion_ssm_role" {
+  type        = string
+  description = "the rds bastion ssm role name"
+  default     = "rds-bastion-ssm-role"
+}
