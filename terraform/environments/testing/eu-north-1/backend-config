@@ -1,0 +1,4 @@
+bucket  = "interview-docplanner"
+region  = "eu-north-1"
+key     = "testing/u-north-1/terraform.tfstate"
+profile = "terraform-test"
