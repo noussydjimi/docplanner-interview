@@ -132,3 +132,41 @@ variable "cluster_desired_size" {
   description = "The eks cluster nodegroup nodes desired number"
   default     = 2
 }
+
+
+
+## ALB CONTROLLER VARIABLES ##
+variable "aws_load_balancer_controller_irsa_role_module_version" {
+  type        = string
+  description = "The aws loadbalancer controller irsa role module version"
+  default     = "5.17.1"
+}
+variable "alb-controller-role-name" {
+  type        = string
+  description = "The eks alb controller IAM role name"
+  default     = "aws-load-balancer-controller"
+}
+
+variable "alb-controller-replica" {
+  type        = number
+  description = "The alb controller replica count"
+  default     = 1
+}
+
+variable "alb-controller-release-name" {
+  type        = string
+  description = "The eks alb controller helm release name"
+  default     = "aws-load-balancer-controller"
+}
+
+variable "alb-controller-release-namespace" {
+  type        = string
+  description = "The eks alb controller helm release namespace"
+  default     = "kube-system"
+}
+
+variable "alb-controller-helmchart-version" {
+  type        = string
+  description = "The eks alb controller helmchart version"
+  default     = "1.5.2"
+}
