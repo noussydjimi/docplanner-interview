@@ -74,3 +74,61 @@ variable "database_subnets" {
   default     = ["10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]
 }
 
+
+##########################
+## EKS MODULE VARIABLES ##
+##########################
+
+variable "cluster_name" {
+  type        = string
+  description = "The eks cluster name"
+  default     = "docplanner"
+}
+
+variable "cluster_version" {
+  type        = string
+  description = "The eks cluster version"
+  default     = "1.24"
+}
+
+variable "default_instance_types" {
+  type        = list(string)
+  description = "The eks default nodegroup instance types"
+  default     = ["t3.micro"]
+}
+
+variable "cluster_instance_types" {
+  type        = list(string)
+  description = "The eks nodegroup instance types"
+  default     = ["t3.medium"]
+}
+
+variable "cluster_capacity_type" {
+  type        = string
+  description = "The eks cluster nodes capacity type"
+  default     = "SPOT"
+}
+
+variable "cluster_disk_size" {
+  type        = number
+  description = "The eks cluster nodes disk size"
+  default     = 50
+}
+
+variable "cluster_min_size" {
+  type        = number
+  description = "The eks cluster nodegroup nodes minimum number"
+  default     = 1
+}
+
+variable "cluster_max_size" {
+  type        = number
+  description = "The eks cluster nodegroup nodes maximum number"
+  default     = 3
+}
+
+variable "cluster_desired_size" {
+  type        = number
+  description = "The eks cluster nodegroup nodes desired number"
+  default     = 2
+}
