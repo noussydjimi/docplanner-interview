@@ -1,4 +1,6 @@
 #### Resources: https://github.com/terraform-aws-modules/terraform-aws-eks/tree/v19.13.1/modules/karpenter
+#### Resources: https://artifacthub.io/packages/helm/karpenter/karpenter
+#### Resources: https://github.com/terraform-aws-modules/terraform-aws-iam
 
 module "karpenter" {
   source = "terraform-aws-modules/eks/aws//modules/karpenter"
@@ -57,3 +59,51 @@ resource "helm_release" "karpenter" {
 
   depends_on = [module.eks.eks_managed_node_groups]
 }
+
+
+########## fix karpenter##########
+module "karpenter_fix" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
+
+  name        = "KarpenterFix"
+  path        = "/"
+  description = "A fix for Karpenter IAM role for service account"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ssm:GetParameter",
+        "pricing:GetProducts",
+        "iam:PassRole",
+        "ec2:TerminateInstances",
+        "ec2:RunInstances",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSpotPriceHistory",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeImages",
+        "ec2:DeleteLaunchTemplate",
+        "ec2:CreateTags",
+        "ec2:CreateLaunchTemplate",
+        "ec2:CreateFleet"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+
+resource "aws_iam_role_policy_attachment" "test-attach" {
+    role       = module.karpenter.irsa_name
+    policy_arn = module.karpenter_fix.arn
+}
+
+data "aws_security_group" "eks_cluster" {
+  id = module.eks.cluster_security_group_id
+}
+
