@@ -136,11 +136,6 @@ variable "cluster_desired_size" {
 
 
 ## ALB CONTROLLER VARIABLES ##
-variable "aws_load_balancer_controller_irsa_role_module_version" {
-  type        = string
-  description = "The aws loadbalancer controller irsa role module version"
-  default     = "5.17.1"
-}
 variable "alb-controller-role-name" {
   type        = string
   description = "The eks alb controller IAM role name"

@@ -1,6 +1,8 @@
+#### Resources: https://artifacthub.io/packages/helm/aws/aws-load-balancer-controller
+
 module "aws_load_balancer_controller_irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = var.aws_load_balancer_controller_irsa_role_module_version
+  version = "5.17.1"
 
   role_name = var.alb-controller-role-name
 
