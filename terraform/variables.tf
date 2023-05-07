@@ -135,7 +135,7 @@ variable "cluster_desired_size" {
 
 
 
-## ALB CONTROLLER VARIABLES ##
+############## ALB CONTROLLER VARIABLES ##############
 variable "alb-controller-role-name" {
   type        = string
   description = "The eks alb controller IAM role name"
@@ -165,3 +165,29 @@ variable "alb-controller-helmchart-version" {
   description = "The eks alb controller helmchart version"
   default     = "1.5.2"
 }
+
+
+############## KARPENTER VARIABLES ##############
+variable "karpenter-namspace" {
+  type        = bool
+  description = "Wether create or not karpenter namespace"
+  default     = true
+}
+variable "karpenter-release-name" {
+  type        = string
+  description = "The karpenter helm release name"
+  default     = "karpenter"
+}
+
+variable "karpenter-release-namespace" {
+  type        = string
+  description = "The karpenter helm release namespace"
+  default     = "karpenter"
+}
+
+variable "karpenter-helmchart-version" {
+  type        = string
+  description = "The karpenter helmchart version"
+  default     = "v0.16.3"
+}
+
