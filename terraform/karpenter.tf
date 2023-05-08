@@ -19,13 +19,13 @@ module "karpenter" {
 
 
 resource "helm_release" "karpenter" {
-  namespace        = var.karpenter-release-name
-  create_namespace = true
+  namespace        = var.karpenter_release_namespace
+  create_namespace = var.karpenter_namespace
 
-  name       = var.karpenter-release-namespace
+  name       = var.karpenter_release_name
   repository = "https://charts.karpenter.sh"
   chart      = "karpenter"
-  version    = var.karpenter-helmchart-version
+  version    = var.karpenter_helmchart_version
 
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
@@ -107,3 +107,13 @@ data "aws_security_group" "eks_cluster" {
   id = module.eks.cluster_security_group_id
 }
 
+resource "helm_release" "provisioner" {
+    name       = var.provisioner_release_name
+    chart      = "../k8s/provisioner"
+    version    = var.provisioner_helmchart_version
+
+    set {
+    name  = "securityGroupSelector"
+    value = data.aws_security_group.eks_cluster.name
+  }
+}

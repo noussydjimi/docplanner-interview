@@ -53,7 +53,7 @@ variable "vpc_secondary_cidr" {
 variable "azs" {
   type        = list(string)
   description = "The list of vpc az"
-  default     = ["eu-north-1a", "eu-north-1b", "eu-north-1c"]
+  default     = ["eu-north-1a", "eu-north-1b"]
 }
 
 variable "public_subnets" {
@@ -65,13 +65,13 @@ variable "public_subnets" {
 variable "private_subnets" {
   type        = list(string)
   description = "The list of private subnet"
-  default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
 variable "database_subnets" {
   type        = list(string)
   description = "The list of database subnet"
-  default     = ["10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]
+  default     = ["10.0.21.0/24", "10.0.22.0/24"]
 }
 
 
@@ -168,24 +168,24 @@ variable "alb-controller-helmchart-version" {
 
 
 ############## KARPENTER VARIABLES ##############
-variable "karpenter-namspace" {
+variable "karpenter_namespace" {
   type        = bool
   description = "Wether create or not karpenter namespace"
   default     = true
 }
-variable "karpenter-release-name" {
+variable "karpenter_release_name" {
   type        = string
   description = "The karpenter helm release name"
   default     = "karpenter"
 }
 
-variable "karpenter-release-namespace" {
+variable "karpenter_release_namespace" {
   type        = string
   description = "The karpenter helm release namespace"
   default     = "karpenter"
 }
 
-variable "karpenter-helmchart-version" {
+variable "karpenter_helmchart_version" {
   type        = string
   description = "The karpenter helmchart version"
   default     = "v0.16.3"
@@ -201,6 +201,19 @@ variable "docplanner_release_name" {
 variable "docplanner_helmchart_version" {
   type        = string
   description = "The docplanner helmchart version"
+  default     = "0.1.0"
+}
+
+############## PROVISIONER VARIABLES ##############
+variable "provisioner_release_name" {
+  type        = string
+  description = "The provisioner helm release name"
+  default     = "provisioner"
+}
+
+variable "provisioner_helmchart_version" {
+  type        = string
+  description = "The provisioner helmchart version"
   default     = "0.1.0"
 }
 
