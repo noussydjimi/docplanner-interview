@@ -191,7 +191,18 @@ variable "karpenter-helmchart-version" {
   default     = "v0.16.3"
 }
 
+############## DOCPLANNER VARIABLES ##############
+variable "docplanner_release_name" {
+  type        = string
+  description = "The docplanner helm release name"
+  default     = "docplanner-app"
+}
 
+variable "docplanner_helmchart_version" {
+  type        = string
+  description = "The docplanner helmchart version"
+  default     = "0.1.0"
+}
 
 ##########################
 ## RDS MODULE VARIABLES ##
