@@ -1,0 +1,7 @@
+app:
+  registry: noussydjimi/docplanner
+  front:
+    tag: front
+  back:
+    tag: back
+  domain: ""

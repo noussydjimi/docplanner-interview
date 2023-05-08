@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: front
-        image: noussydjimi/docplanner:front
+        image: "{{ .Values.app.registry }}:{{ .Values.app.front.tag }}"
         resources:
           requests:
             cpu: "250m"
