@@ -224,7 +224,7 @@ variable "provisioner_helmchart_version" {
 variable "rds_identifier" {
   type        = string
   description = "The rds instance identifier"
-  default     = "doc-planner"
+  default     = "docplanner"
 }
 
 variable "rds_engine" {

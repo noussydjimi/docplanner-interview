@@ -12,9 +12,9 @@ module "db" {
   instance_class    = var.rds_instance_class
   allocated_storage = var.rds_instance_allocated_storage
 
-  db_name  = var.rds_db_name
-  username = var.rds_username
-  port     = var.rds_port
+  db_name                = var.rds_db_name
+  username               = var.rds_username
+  port                   = var.rds_port
   create_random_password = true
 
   iam_database_authentication_enabled = true
@@ -43,11 +43,11 @@ module "db" {
 
   parameters = [
     {
-      name = "autovacuum"
+      name  = "autovacuum"
       value = "1"
     },
     {
-      name = "client_encoding"
+      name  = "client_encoding"
       value = "utf8"
     }
   ]
@@ -69,19 +69,19 @@ module "ec2_instance" {
 
   name = var.rds_bastion_name
 
-  ami                    = data.aws_ami.bastion-ami.id
-  instance_type          = var.rds_bastion_instance_type
-  monitoring             = false
-  availability_zone      = var.rds_bastion_az
-  vpc_security_group_ids = ["${aws_security_group.rds_bastion.id}"]
-  subnet_id              = module.vpc.public_subnets[0]
+  ami                         = data.aws_ami.bastion-ami.id
+  instance_type               = var.rds_bastion_instance_type
+  monitoring                  = false
+  availability_zone           = var.rds_bastion_az
+  vpc_security_group_ids      = ["${aws_security_group.rds_bastion.id}"]
+  subnet_id                   = module.vpc.public_subnets[0]
   associate_public_ip_address = var.rds_bastion_public_ip
 
   create_spot_instance = var.rds_bastion_spot_instance
 
-  iam_role_name = module.iam_assumable_role.iam_role_name
+  iam_role_name        = module.iam_assumable_role.iam_role_name
   iam_instance_profile = module.iam_assumable_role.iam_instance_profile_name
-  iam_role_path = module.iam_assumable_role.iam_role_path
+  iam_role_path        = module.iam_assumable_role.iam_role_path
 
   # tags = var.tags
 }
@@ -100,20 +100,20 @@ resource "aws_security_group" "rds" {
 }
 
 resource "aws_security_group_rule" "rds-eks" {
-  type              = "ingress"
-  from_port         = 0
-  to_port           = 65535
-  protocol          = "-1"
-  security_group_id = aws_security_group.rds.id
+  type                     = "ingress"
+  from_port                = 0
+  to_port                  = 65535
+  protocol                 = "-1"
+  security_group_id        = aws_security_group.rds.id
   source_security_group_id = module.eks.cluster_security_group_id
 }
 
 resource "aws_security_group_rule" "rds_bastion" {
-  type              = "ingress"
-  from_port         = 5432
-  to_port           = 5432
-  protocol          = "-1"
-  security_group_id = aws_security_group.rds.id
+  type                     = "ingress"
+  from_port                = 5432
+  to_port                  = 5432
+  protocol                 = "-1"
+  security_group_id        = aws_security_group.rds.id
   source_security_group_id = aws_security_group.rds_bastion.id
 }
 
@@ -155,7 +155,7 @@ module "iam_assumable_role" {
     "ec2.amazonaws.com"
   ]
 
-  create_role = true
+  create_role             = true
   create_instance_profile = true
 
   role_name         = var.rds_bastion_ssm_role

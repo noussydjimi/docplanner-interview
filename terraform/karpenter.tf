@@ -3,7 +3,7 @@
 #### Resources: https://github.com/terraform-aws-modules/terraform-aws-iam
 
 module "karpenter" {
-  source = "terraform-aws-modules/eks/aws//modules/karpenter"
+  source  = "terraform-aws-modules/eks/aws//modules/karpenter"
   version = "= 19.3.1"
 
   cluster_name = module.eks.cluster_name
@@ -14,7 +14,7 @@ module "karpenter" {
   create_iam_role = false
   iam_role_arn    = module.eks.eks_managed_node_groups["initial"].iam_role_arn
 
-#   tags = var.tags
+  #   tags = var.tags
 }
 
 
@@ -52,7 +52,7 @@ resource "helm_release" "karpenter" {
     value = "debug"
   }
 
-    set {
+  set {
     name  = "controller.logLevel"
     value = "debug"
   }
@@ -63,7 +63,7 @@ resource "helm_release" "karpenter" {
 
 ########## fix karpenter##########
 module "karpenter_fix" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
+  source = "terraform-aws-modules/iam/aws//modules/iam-policy"
 
   name        = "KarpenterFix"
   path        = "/"
@@ -99,8 +99,8 @@ EOF
 
 
 resource "aws_iam_role_policy_attachment" "test-attach" {
-    role       = module.karpenter.irsa_name
-    policy_arn = module.karpenter_fix.arn
+  role       = module.karpenter.irsa_name
+  policy_arn = module.karpenter_fix.arn
 }
 
 data "aws_security_group" "eks_cluster" {
@@ -108,12 +108,14 @@ data "aws_security_group" "eks_cluster" {
 }
 
 resource "helm_release" "provisioner" {
-    name       = var.provisioner_release_name
-    chart      = "../k8s/provisioner"
-    version    = var.provisioner_helmchart_version
+  name    = var.provisioner_release_name
+  chart   = "../k8s/provisioner"
+  version = var.provisioner_helmchart_version
 
-    set {
+  set {
     name  = "securityGroupSelector"
     value = data.aws_security_group.eks_cluster.name
   }
+
+  depends_on = [helm_release.karpenter]
 }

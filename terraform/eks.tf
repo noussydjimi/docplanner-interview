@@ -7,7 +7,7 @@ module "eks" {
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
 
-  cluster_endpoint_public_access  = true
+  cluster_endpoint_public_access = true
 
   cluster_addons = {
     coredns = {
@@ -27,7 +27,7 @@ module "eks" {
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
-    instance_types = var.default_instance_types
+    instance_types             = var.default_instance_types
     iam_role_attach_cni_policy = true
   }
 
@@ -39,7 +39,7 @@ module "eks" {
 
       instance_types = var.cluster_instance_types
       capacity_type  = var.cluster_capacity_type
-      disk_size = var.cluster_disk_size
+      disk_size      = var.cluster_disk_size
     }
   }
 

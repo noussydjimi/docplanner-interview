@@ -1,25 +1,25 @@
 #### Resources: https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release
 resource "helm_release" "doc_planner_app" {
-    name       = var.docplanner_release_name
-    chart      = "../k8s/docplanner"
-    version    = var.docplanner_helmchart_version
+  name    = var.docplanner_release_name
+  chart   = "../k8s/docplanner"
+  version = var.docplanner_helmchart_version
 
-    set {
+  set {
     name  = "app.registry"
     value = "noussydjimi/docplanner"
   }
 
-    set {
+  set {
     name  = "app.front.tag"
     value = "front"
   }
 
-    set {
+  set {
     name  = "app.back.tag"
     value = "back"
   }
 
-    set {
+  set {
     name  = "app.domain"
     value = ""
   }
