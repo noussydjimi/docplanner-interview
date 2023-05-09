@@ -1,4 +1,4 @@
-bucket  = "interview-docplanner"
+bucket  = "docplanner-interview"
 region  = "eu-north-1"
 key     = "prod/eu-north-1/terraform.tfstate"
-profile = "terraform-test"
+profile = "docplanner-interview"
