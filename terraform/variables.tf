@@ -17,7 +17,7 @@ variable "aws_account_id" {
 variable "aws_profile" {
   type        = string
   description = "The AWS profile."
-  default     = "terraform-test"
+  default     = "docplanner-interview"
 }
 
 # variable "tags" {
